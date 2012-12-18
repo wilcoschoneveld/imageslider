@@ -173,18 +173,6 @@
 			
 			//go to the first frame!
 			forcenext(bslider.settings.autostart);
-			
-			/* 
-			//if user wants autostart
-			if(bslider.settings.autostart) {
-				//set the main timer
-				//bslider.maintimer = setInterval(run, 1000/bslider.settings.ups);
-				bsframe.start();
-				bslider.timestart = 0;
-			} else {
-				//set a temp timer to display first image
-				bslider.temptimer = setTimeout(run, 1000/bslider.settings.ups);
-			} */
 		}
 		
 		//preload image by given index
