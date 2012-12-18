@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bearslider Example</title>
+		<style type="text/css">
+			body { background: #eeeeee; }
+		
+			#slider {
+				position: relative;
+				margin: auto;
+			
+				width: 900px;
+				height: 500px;
+				
+				background: #ffffff;
+				-webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+				-moz-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+				box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+			}
+			
+			.btprev {
+				position: absolute;
+				left: 10px;
+				top: 225px;
+				
+				width: 50px;
+				height: 50px;
+				
+				background-image: url("buttons.png");
+				background-position: 0px 50px;
+			}
+			
+			.btprev:hover {
+				background-position: 0px 0px;
+			}
+			
+			.btnext {
+				position: absolute;
+				right: 10px;
+				top: 225px;
+				
+				width: 50px;
+				height: 50px;
+				
+				background-image: url("buttons.png");
+				background-position: 50px 50px;
+			}
+			
+			.btnext:hover {
+				background-position: 50px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<center> <img style="margin:10px" src="bearslider.png"> </center>
+	
+		<div id="slider">
+			<!-- give control elements a "do not remove" tag (DNR) to prevent the plugin from removing them -->
+			<a href="#" class="btprev DNR"></a>
+			<a href="#" class="btnext DNR"></a>
+		
+			<!-- you can further leave this empty if you want to load the images via AJAX, otherwise put images here -->
+		</div>
+		
+		<!-- ofcourse controls can also be placed outside the frame -->
+		<br>
+		<center>
+		<a href="#s" class="start">START</a> / <a href="#s" class="stop">STOP</a>
+		<div id="statusmsg">status: running</div>
+		</center>
+		
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="js/bearslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//Setup the slider
+				var slider = $("#slider").bearslider({
+					//IMAGE DATA
+					dataUrl: "images.json",		//AJAX data url
+					dataType: "json",			//AJAX data type
+					
+					//OPTIONAL MORE IMAGE DATA
+					images: [],					//Javascript image array
+					stringJSON: "",				//JSON data string
+					stringXML: "",				//XML data string
+					
+					//OPTIONS
+					autostart: true,			//should bearslider start automatically?
+					random: true, 				//should bearslider randomize the image sequence?
+					startid: "", 				//id of first image
+					duration: 5,				//total duration each slide is in view
+					transitiontime: 1, 			//animation time
+					
+					//ADVANCED
+					preloadall: false, 			//should all images be preloaded at start?
+					ups: 10, 					//amount of updates per second
+				});
+				
+				//Link the buttons to the slider
+				$(".btprev").click(function() { slider.gotoPrev() });
+				$(".btnext").click(function() { slider.gotoNext() });
+				
+				$(".start").click(function() { slider.gotoNext(true) });
+				$(".stop").click(function() { slider.stop() });
+				
+				slider.bind("onStateChange", function(e, running) {
+					if(running) $("#statusmsg").html("status: running");
+					else $("#statusmsg").html("status: not running");
+				});
+			});
+		</script>
+	</body>
+</html>
