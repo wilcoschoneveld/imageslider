@@ -23,7 +23,7 @@
 		
 		//ADVANCED
 		preloadall: false, 			//should all images be preloaded at start?
-		ups: 10, 					//amount of updates per second
+		ups: 10 					//amount of updates per second
 	};
 
 	//find the prefix for css properties (taken from Jquery Transit v0.1.3)
